@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Official NASA Black-White-Red Design System Tokens */
+    --color-primary-dark: #000000;
+    --color-secondary-dark: #0d0d12;
+    --color-tertiary-dark: #15151c;
+    --color-accent-red: #f64137;
+    --color-accent-red-hover: #b60109;
+    --color-accent-red-bright: #ff4d42;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #d1d1d6;
+    --color-text-tertiary: #8e8e99;
+    --color-success: #00ff88;
+    --color-warning: #ffaa00;
+    --color-critical: #f64137;
+    --border-red: rgba(246, 65, 55, 0.28);
+    --border-red-visible: rgba(246, 65, 55, 0.5);
+    --border-red-highlight: rgba(246, 65, 55, 0.85);
+    --border-white: rgba(255, 255, 255, 0.14);
+    --border-white-subtle: rgba(255, 255, 255, 0.08);
+    --bg-overlay: rgba(0, 0, 0, 0.85);
+    --bg-navbar: rgba(0, 0, 0, 0.96);
+    --shadow-glow-red: 0 0 20px rgba(246, 65, 55, 0.35);
+    --shadow-glow-red-intense: 0 0 40px rgba(246, 65, 55, 0.65);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.6);
+
+    /* Spacing scale */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-3xl: 40px;
+    --spacing-4xl: 48px;
+    --spacing-5xl: 56px;
+
+    /* Transitions */
+    --duration-transition: 0.3s;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+
+  code, pre, .font-mono, .data-number {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+}
+
+/* Typography Scale */
+.text-h1 {
+  font-size: 56px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .text-h1 { font-size: 36px; }
+}
+
+.text-h2 {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .text-h2 { font-size: 28px; }
+}
+
+.text-h3 {
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .text-h3 { font-size: 24px; }
+}
+
+/* Official NASA Red Custom Buttons */
+.btn-primary-scitech {
+  background: linear-gradient(135deg, #f64137 0%, #d62828 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  padding: 14px 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(246, 65, 55, 0.45);
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.btn-primary-scitech:hover {
+  background: linear-gradient(135deg, #ff4d42 0%, #b60109 100%) !important;
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(246, 65, 55, 0.75);
+}
+.btn-primary-scitech:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary-scitech {
+  background: #000000 !important;
+  border: 2px solid #f64137 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  padding: 14px 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(246, 65, 55, 0.25);
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.btn-secondary-scitech:hover {
+  background: #f64137 !important;
+  border-color: #f64137 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px rgba(246, 65, 55, 0.6);
+  transform: scale(1.02);
+}
+.btn-secondary-scitech:active {
+  background: #d62828 !important;
+  transform: scale(0.98);
+}
+
+.btn-icon-scitech {
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  border: 1.5px solid #f64137;
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-icon-scitech:hover {
+  border-color: #f64137;
+  color: #ffffff;
+  background: #f64137;
+  box-shadow: 0 0 15px rgba(246, 65, 55, 0.45);
+}
+
+/* Official NASA High-Contrast Black Section Card Component */
+.data-card-scitech {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 24px;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+.data-card-scitech:hover {
+  border-color: #f64137;
+  box-shadow: 0 12px 35px rgba(246, 65, 55, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Section Containers (Sessions / Sections) - High-Contrast Black */
+.section-card-scitech {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 32px;
+  color: #ffffff;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .section-card-scitech {
+    padding: 48px;
+  }
+}
+
+/* Status Indicators */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-indicator.status-success {
+  background-color: #00ff88;
+  box-shadow: 0 0 8px #00ff88;
+}
+.status-indicator.status-warning {
+  background-color: #ffaa00;
+  box-shadow: 0 0 8px #ffaa00;
+}
+.status-indicator.status-critical,
+.status-indicator.status-red {
+  background-color: #f64137;
+  box-shadow: 0 0 8px #f64137;
+}
+.status-indicator.status-cyan {
+  background-color: #f64137;
+  box-shadow: 0 0 8px #f64137;
+}
+
+/* Editorial Grid Background */
+.editorial-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Custom NASA Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(246, 65, 55, 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f64137;
+  box-shadow: 0 0 10px rgba(246, 65, 55, 0.6);
+}
+
+/* Leaflet Dark Theme Overrides */
+.leaflet-container {
+  background: #000000 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.leaflet-bar a {
+  background-color: #0d0d12 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.leaflet-bar a:hover {
+  background-color: #1a1a24 !important;
+  color: #f64137 !important;
+  box-shadow: 0 0 10px rgba(246, 65, 55, 0.3) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: #0d0d12 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(246, 65, 55, 0.4) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 25px rgba(246, 65, 55, 0.25) !important;
+}
+.leaflet-popup-tip {
+  background: #0d0d12 !important;
+}
+
+/* Focus outline */
+*:focus-visible {
+  outline: 2px solid #f64137;
+  outline-offset: 4px;
+}
