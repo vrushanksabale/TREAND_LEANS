@@ -569,12 +569,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               {/* Datasets Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {filteredDataSources.map(ds => {
-                  const targetVarId = 
-                    ds.id === 'nasa_power' ? 'surface_temperature' :
-                    ds.id === 'lp_daac_modis' ? 'vegetation_index' :
-                    ds.id === 'nsidc_sea_ice' ? 'sea_ice_extent' :
-                    ds.id === 'podaac_grace' ? 'groundwater_storage' :
-                    'surface_temperature';
+                  // Map each data source to the most scientifically relevant variable + region
+                  const dsMapping: Record<string, { varId: string; regionId: string }> = {
+                    nasa_power:        { varId: 'surface_temperature', regionId: 'mediterranean_basin' },
+                    nasa_gibs:         { varId: 'vegetation_index',    regionId: 'amazon_basin' },
+                    nasa_cmr:          { varId: 'precipitation',       regionId: 'indus_ganges_basin' },
+                    merra2:            { varId: 'aerosol_optical_depth', regionId: 'indus_ganges_basin' },
+                    modis_terra_aqua:  { varId: 'vegetation_index',    regionId: 'sahel_belt' },
+                    gpm_imerg:         { varId: 'precipitation',       regionId: 'amazon_basin' },
+                    grace_fo:          { varId: 'groundwater_storage', regionId: 'california_central_valley' },
+                    nsidc_sea_ice:     { varId: 'sea_ice_extent',      regionId: 'arctic_ocean' },
+                    // legacy ids kept for compatibility
+                    lp_daac_modis:     { varId: 'vegetation_index',    regionId: 'amazon_basin' },
+                    podaac_grace:      { varId: 'groundwater_storage', regionId: 'california_central_valley' },
+                  };
+                  const { varId: targetVarId, regionId: targetRegionId } =
+                    dsMapping[ds.id] ?? { varId: 'surface_temperature', regionId: 'global_ocean_average' };
 
                   return (
                     <div
@@ -662,7 +672,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => onReloadAnalysis(targetVarId, 'global', 2000, 2024)}
+                            onClick={() => onReloadAnalysis(targetVarId, targetRegionId, 2000, 2024)}
                             className="btn-primary-scitech text-xs py-2 px-3.5"
                           >
                             <Compass size={13} />

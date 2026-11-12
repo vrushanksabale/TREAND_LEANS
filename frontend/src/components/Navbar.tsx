@@ -212,16 +212,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   // NASA.gov Explore Categories
   const exploreCategories = [
-    { id: 'earth', name: 'Earth Science & Climate', count: '8 Topics' },
-    { id: 'missions', name: 'NASA Missions', count: '10 Portals' },
-    { id: 'humans', name: 'Humans in Space', count: '6 Programs' },
-    { id: 'solar', name: 'The Solar System', count: '14 Worlds' },
-    { id: 'universe', name: 'The Universe', count: '8 Realms' },
-    { id: 'science', name: 'Science & Discovery', count: '9 Directorates' },
-    { id: 'aeronautics', name: 'Aeronautics & X-Planes', count: '7 Hubs' },
-    { id: 'technology', name: 'Technology & Spinoffs', count: '8 Fields' },
-    { id: 'learning', name: 'Learning Resources', count: 'STEM & Educators' },
-    { id: 'about', name: 'About NASA', count: 'Centers & Legacy' },
+    { id: 'earth', name: 'Earth Science & Climate', count: '8 Topics', url: 'https://science.nasa.gov/earth/' },
+    { id: 'missions', name: 'NASA Missions', count: '10 Portals', url: 'https://www.nasa.gov/missions/' },
+    { id: 'humans', name: 'Humans in Space', count: '6 Programs', url: 'https://www.nasa.gov/humans-in-space/' },
+    { id: 'solar', name: 'The Solar System', count: '14 Worlds', url: 'https://science.nasa.gov/solar-system/' },
+    { id: 'universe', name: 'The Universe', count: '8 Realms', url: 'https://science.nasa.gov/universe/' },
+    { id: 'science', name: 'Science & Discovery', count: '9 Directorates', url: 'https://science.nasa.gov/' },
+    { id: 'aeronautics', name: 'Aeronautics & X-Planes', count: '7 Hubs', url: 'https://www.nasa.gov/aeronautics/' },
+    { id: 'technology', name: 'Technology & Spinoffs', count: '8 Fields', url: 'https://www.nasa.gov/technology/' },
+    { id: 'learning', name: 'Learning Resources', count: 'STEM & Educators', url: 'https://www.nasa.gov/learning-resources/' },
+    { id: 'about', name: 'About NASA', count: 'Centers & Legacy', url: 'https://www.nasa.gov/about/' },
   ];
 
   return (
@@ -580,7 +580,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <button
                         key={cat.id}
                         onMouseEnter={() => setActiveCategory(cat.id)}
-                        onClick={() => setActiveCategory(cat.id)}
+                        onClick={() => {
+                          setActiveCategory(cat.id);
+                          window.open(cat.url, '_blank', 'noopener,noreferrer');
+                        }}
                         className={`w-full text-left px-3 py-2 rounded-md transition-all flex items-center justify-between group cursor-pointer ${
                           isSelected
                             ? 'bg-[#121218] text-[#f64137] font-semibold border border-[rgba(246,65,55,0.4)] shadow-[0_0_12px_rgba(246,65,55,0.15)]'
@@ -588,7 +591,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         }`}
                       >
                         <span className="text-xs">{cat.name}</span>
-                        <ChevronRight size={13} className={`transition-transform duration-200 ${isSelected ? 'text-[#f64137] translate-x-1' : 'opacity-40 group-hover:opacity-80'}`} />
+                        <ExternalLink size={12} className={`transition-transform duration-200 ${isSelected ? 'text-[#f64137]' : 'opacity-40 group-hover:opacity-80 group-hover:text-[#f64137]'}`} />
                       </button>
                     );
                   })}
@@ -606,35 +609,33 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   {activeCategory === 'earth' && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="p-3 rounded-lg bg-[#0d0d12] border border-[rgba(255,255,255,0.12)] hover:border-[#f64137] transition-all group">
-                        <div className="text-xs font-bold text-[#ffffff] group-hover:text-[#f64137] mb-1">
+                      {/* TrendLens Workbench card — fully clickable */}
+                      <button
+                        onClick={handleWorkbenchProtected}
+                        className="p-3 rounded-lg bg-[#0d0d12] border border-[rgba(255,255,255,0.12)] hover:border-[#f64137] transition-all group text-left cursor-pointer"
+                      >
+                        <div className="text-xs font-bold text-[#ffffff] group-hover:text-[#f64137] mb-1 flex items-center justify-between">
                           TrendLens Workbench
+                          <ArrowUpRight size={12} className="text-[#f64137] opacity-60 group-hover:opacity-100" />
                         </div>
-                        <p className="text-[11px] text-[#d1d1d6] mb-2 leading-relaxed">
+                        <p className="text-[11px] text-[#d1d1d6] leading-relaxed">
                           Test statistical significance across 6 Earth system variables with Sen's slope.
                         </p>
-                        <button
-                          onClick={handleWorkbenchProtected}
-                          className="text-[11px] font-bold text-[#f64137] flex items-center gap-1 hover:underline cursor-pointer"
-                        >
-                          Launch Workbench <ArrowUpRight size={12} />
-                        </button>
-                      </div>
+                      </button>
 
-                      <div className="p-3 rounded-lg bg-[#0d0d12] border border-[rgba(255,255,255,0.12)] hover:border-[#f64137] transition-all group">
-                        <div className="text-xs font-bold text-[#ffffff] group-hover:text-[#f64137] mb-1">
+                      {/* Opposite Trend Cases card — fully clickable */}
+                      <button
+                        onClick={() => handleNavClick('trend-cases')}
+                        className="p-3 rounded-lg bg-[#0d0d12] border border-[rgba(255,255,255,0.12)] hover:border-[#f64137] transition-all group text-left cursor-pointer"
+                      >
+                        <div className="text-xs font-bold text-[#ffffff] group-hover:text-[#f64137] mb-1 flex items-center justify-between">
                           Opposite Trend Cases
+                          <ArrowUpRight size={12} className="text-[#f64137] opacity-60 group-hover:opacity-100" />
                         </div>
-                        <p className="text-[11px] text-[#d1d1d6] mb-2 leading-relaxed">
+                        <p className="text-[11px] text-[#d1d1d6] leading-relaxed">
                           Explore Sahel vs Mediterranean, Arctic vs Antarctic, and India Groundwater.
                         </p>
-                        <button
-                          onClick={() => handleNavClick('trend-cases')}
-                          className="text-[11px] font-bold text-[#f64137] flex items-center gap-1 hover:underline cursor-pointer"
-                        >
-                          View 6 Cases <ArrowUpRight size={12} />
-                        </button>
-                      </div>
+                      </button>
 
                       <div className="space-y-1.5 sm:col-span-2 pt-2">
                         {[
@@ -648,7 +649,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                             href={lnk.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-between p-2 rounded text-xs text-[#d1d1d6] hover:text-[#ffffff] hover:bg-[#121218] transition-all group"
+                            className="flex items-center justify-between p-2 rounded text-xs text-[#d1d1d6] hover:text-[#ffffff] hover:bg-[#121218] hover:border-[rgba(246,65,55,0.4)] border border-transparent transition-all group"
                           >
                             <span>{lnk.title}</span>
                             <ExternalLink size={12} className="text-[#f64137] opacity-0 group-hover:opacity-100" />
@@ -686,36 +687,100 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
                   )}
 
-                  {activeCategory !== 'earth' && activeCategory !== 'missions' && (
-                    <div className="space-y-2.5">
-                      <p className="text-xs text-[#d1d1d6] leading-relaxed">
-                        Access direct research documentation and space agency assets for {exploreCategories.find(c => c.id === activeCategory)?.name}.
-                      </p>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <a
-                          href="https://science.nasa.gov/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2.5 rounded bg-[#0d0d12] text-[#ffffff] hover:text-[#f64137] border border-[rgba(255,255,255,0.15)] flex items-center justify-between"
-                        >
-                          <span>Science Directorates</span>
-                          <ExternalLink size={12} />
-                        </a>
-                        <a
-                          href="https://www.nasa.gov/learning-resources/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2.5 rounded bg-[#0d0d12] text-[#ffffff] hover:text-[#f64137] border border-[rgba(255,255,255,0.15)] flex items-center justify-between"
-                        >
-                          <span>Open Learning Resources</span>
-                          <ExternalLink size={12} />
-                        </a>
+                  {activeCategory !== 'earth' && activeCategory !== 'missions' && (() => {
+                    const categoryLinks: Record<string, { label: string; url: string }[]> = {
+                      humans: [
+                        { label: 'Artemis Program', url: 'https://www.nasa.gov/humans-in-space/artemis/' },
+                        { label: 'International Space Station', url: 'https://www.nasa.gov/international-space-station/' },
+                        { label: 'Commercial Crew', url: 'https://www.nasa.gov/humans-in-space/commercial-space/' },
+                        { label: 'Astronaut Corps', url: 'https://www.nasa.gov/humans-in-space/astronauts/' },
+                        { label: 'Space Life Sciences', url: 'https://www.nasa.gov/humans-in-space/human-research/' },
+                        { label: 'Gateway Lunar Station', url: 'https://www.nasa.gov/gateway/' },
+                      ],
+                      solar: [
+                        { label: 'Sun & Heliophysics', url: 'https://science.nasa.gov/heliophysics/' },
+                        { label: 'Mars Exploration', url: 'https://science.nasa.gov/mars/' },
+                        { label: 'Moon', url: 'https://science.nasa.gov/moon/' },
+                        { label: 'Jupiter & Europa', url: 'https://science.nasa.gov/jupiter/' },
+                        { label: 'Asteroids & Comets', url: 'https://science.nasa.gov/planetary-defense/' },
+                        { label: 'Skywatching', url: 'https://science.nasa.gov/solar-system/skywatching/' },
+                      ],
+                      universe: [
+                        { label: 'James Webb Telescope', url: 'https://science.nasa.gov/mission/webb/' },
+                        { label: 'Black Holes', url: 'https://science.nasa.gov/universe/black-holes/' },
+                        { label: 'Exoplanets', url: 'https://science.nasa.gov/exoplanets/' },
+                        { label: 'Galaxies', url: 'https://science.nasa.gov/universe/galaxies/' },
+                        { label: 'Dark Matter & Energy', url: 'https://science.nasa.gov/universe/dark-energy-dark-matter/' },
+                        { label: 'Origins of Universe', url: 'https://science.nasa.gov/universe/overview/' },
+                      ],
+                      science: [
+                        { label: 'Earth Science', url: 'https://science.nasa.gov/earth/' },
+                        { label: 'Planetary Science', url: 'https://science.nasa.gov/planetary-science/' },
+                        { label: 'Astrophysics', url: 'https://science.nasa.gov/astrophysics/' },
+                        { label: 'Heliophysics', url: 'https://science.nasa.gov/heliophysics/' },
+                        { label: 'Open Science Initiative', url: 'https://science.nasa.gov/open-science/' },
+                        { label: 'Science Activation', url: 'https://science.nasa.gov/learn/' },
+                      ],
+                      aeronautics: [
+                        { label: 'Sustainable Aviation', url: 'https://www.nasa.gov/aeronautics/sustainable-aviation/' },
+                        { label: 'Advanced Air Mobility', url: 'https://www.nasa.gov/aeronautics/advanced-air-mobility/' },
+                        { label: 'Supersonic Research', url: 'https://www.nasa.gov/aeronautics/low-boom/' },
+                        { label: 'Air Traffic Management', url: 'https://www.nasa.gov/aeronautics/airspace/' },
+                        { label: 'X-Planes', url: 'https://www.nasa.gov/aeronautics/x-planes/' },
+                        { label: 'Drones & UAS', url: 'https://www.nasa.gov/aeronautics/utm/' },
+                      ],
+                      technology: [
+                        { label: 'Technology Transfer', url: 'https://www.nasa.gov/technology/tech-transfer-spinoffs/' },
+                        { label: 'Spinoffs', url: 'https://spinoff.nasa.gov/' },
+                        { label: 'Small Business (SBIR)', url: 'https://sbir.nasa.gov/' },
+                        { label: 'Space Technology', url: 'https://www.nasa.gov/space-technology-mission-directorate/' },
+                        { label: 'Robotics & AI', url: 'https://www.nasa.gov/technology/robotics-autonomous-systems/' },
+                        { label: 'Software Catalog', url: 'https://software.nasa.gov/' },
+                      ],
+                      learning: [
+                        { label: 'STEM Engagement', url: 'https://www.nasa.gov/learning-resources/stem-engagement/' },
+                        { label: 'For Students', url: 'https://www.nasa.gov/learning-resources/for-students/' },
+                        { label: 'For Educators', url: 'https://www.nasa.gov/learning-resources/for-educators/' },
+                        { label: 'Space Apps Challenge', url: 'https://www.spaceappschallenge.org/' },
+                        { label: 'NASA Open Data', url: 'https://data.nasa.gov/' },
+                        { label: 'Museums & Exhibits', url: 'https://www.nasa.gov/learning-resources/museum-and-informal-education/' },
+                      ],
+                      about: [
+                        { label: 'NASA Leadership', url: 'https://www.nasa.gov/about/org_index.html' },
+                        { label: 'NASA Centers', url: 'https://www.nasa.gov/centers-and-facilities/' },
+                        { label: 'Strategic Plan', url: 'https://www.nasa.gov/about/strategic-plan/' },
+                        { label: 'Budget & Annual Reports', url: 'https://www.nasa.gov/budget/' },
+                        { label: 'History Office', url: 'https://history.nasa.gov/' },
+                        { label: 'Careers at NASA', url: 'https://www.nasa.gov/careers/' },
+                      ],
+                    };
+                    const links = categoryLinks[activeCategory] || [];
+                    const activeCat = exploreCategories.find(c => c.id === activeCategory);
+                    return (
+                      <div className="space-y-2.5">
+                        <p className="text-xs text-[#d1d1d6] leading-relaxed">
+                          Access direct research documentation and space agency assets for <span className="text-[#f64137] font-semibold">{activeCat?.name}</span>.
+                        </p>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          {links.map((lnk, idx) => (
+                            <a
+                              key={idx}
+                              href={lnk.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2.5 rounded bg-[#0d0d12] text-[#ffffff] hover:text-[#f64137] hover:bg-[rgba(246,65,55,0.1)] border border-[rgba(255,255,255,0.15)] hover:border-[rgba(246,65,55,0.4)] flex items-center justify-between transition-all"
+                            >
+                              <span>{lnk.label}</span>
+                              <ExternalLink size={12} />
+                            </a>
+                          ))}
+                        </div>
+                        <div className="p-3 rounded bg-[rgba(246,65,55,0.1)] border border-[rgba(246,65,55,0.3)] text-xs text-[#ffffff]">
+                          NASA TrendLens connects Earth System science with Space Apps data challenge requirements.
+                        </div>
                       </div>
-                      <div className="p-3 rounded bg-[rgba(246,65,55,0.1)] border border-[rgba(246,65,55,0.3)] text-xs text-[#ffffff]">
-                        NASA TrendLens connects Earth System science with Space Apps data challenge requirements.
-                      </div>
-                    </div>
-                  )}
+                    );
+                  })()}
                 </div>
 
                 {/* COLUMN 3: Featured Stories from NASA.gov HTML (4 cols) */}
