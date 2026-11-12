@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DATA_SOURCES_CATALOG } from '../data/dataSourcesCatalog';
-import { DataSourceMetadata } from '../types';
-import { Database, ExternalLink, Search, Shield, Layers, FileText } from 'lucide-react';
+import { Database, ExternalLink, Search, Shield } from 'lucide-react';
 
 export const DataSourcesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');

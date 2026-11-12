@@ -76,6 +76,19 @@ export const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     return { minVal: min, maxVal: max, yRange: range, yTicks: ticks };
   }, [chartData, viewMode, n]);
 
+  const xTicks = useMemo(() => {
+    if (n === 0) return [];
+    const step = Math.max(1, Math.floor(n / 6));
+    const list = [];
+    for (let i = 0; i < n; i += step) {
+      list.push({ index: i, point: chartData[i] });
+    }
+    if (list[list.length - 1].index !== n - 1) {
+      list.push({ index: n - 1, point: chartData[n - 1] });
+    }
+    return list;
+  }, [chartData, n]);
+
   if (n === 0) {
     return (
       <div className="h-64 flex items-center justify-center text-[#a0b0c0] font-mono text-sm bg-[#0d0d12] border border-[rgba(255,255,255,0.1)] rounded-xl">
@@ -132,18 +145,6 @@ export const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
     ciPolygonPoints = `${padding.left},${ciUpperY1} ${padding.left + innerWidth},${ciUpperY2} ${padding.left + innerWidth},${ciLowerY2} ${padding.left},${ciLowerY1}`;
   }
-
-  const xTicks = useMemo(() => {
-    const step = Math.max(1, Math.floor(n / 6));
-    const list = [];
-    for (let i = 0; i < n; i += step) {
-      list.push({ index: i, point: chartData[i] });
-    }
-    if (list[list.length - 1].index !== n - 1) {
-      list.push({ index: n - 1, point: chartData[n - 1] });
-    }
-    return list;
-  }, [chartData, n]);
 
   const activePoint = hoverIndex !== null ? chartData[hoverIndex] : null;
 

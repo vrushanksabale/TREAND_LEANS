@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Key, ShieldCheck, ArrowRight, Info } from 'lucide-react';
+import { X, Info } from 'lucide-react';
 import { 
   loginWithEmail, 
   registerWithEmail, 

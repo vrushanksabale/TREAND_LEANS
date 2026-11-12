@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Menu, X, User, LogOut, Search, ChevronDown, ChevronRight, 
-  ExternalLink, Globe, Sparkles, Radio, Tv, Flame, BookOpen, 
-  Layers, Activity, Compass, ArrowUpRight
+  Menu, X, User, LogOut, Search, ChevronDown, 
+  ExternalLink, Sparkles, Tv, ArrowUpRight
 } from 'lucide-react';
 import { UserProfile } from '../types';
 

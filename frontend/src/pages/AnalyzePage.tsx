@@ -11,20 +11,13 @@ import { TrendMap } from '../components/maps/TrendMap';
 import { TimeSeriesChart } from '../components/charts/TimeSeriesChart';
 import { ExplanationDrawer } from '../components/ExplanationDrawer';
 import { 
-  Compass, 
   Bookmark, 
   Download, 
   HelpCircle, 
-  Layers, 
   Sliders, 
   CheckCircle2, 
   AlertTriangle, 
-  RefreshCw, 
-  Share2, 
-  FileSpreadsheet, 
-  Sparkles,
-  Info,
-  Maximize2
+  FileSpreadsheet
 } from 'lucide-react';
 
 interface AnalyzePageProps {

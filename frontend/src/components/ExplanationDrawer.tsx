@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, HelpCircle, CheckCircle2, AlertTriangle, ExternalLink } from 'lucide-react';
+import { X, HelpCircle, AlertTriangle } from 'lucide-react';
 
 interface ExplanationDrawerProps {
   isOpen: boolean;

@@ -10,8 +10,7 @@ import {
   Download, 
   Activity, 
   ArrowRight,
-  ShieldCheck,
-  CheckCircle2
+  ShieldCheck
 } from 'lucide-react';
 import { UserProfile } from '../types';
 

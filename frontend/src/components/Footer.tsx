@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Compass, ShieldCheck, Database, Layers } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 interface FooterProps {
   onRouteChange: (route: string) => void;

@@ -1,11 +1,21 @@
 import React from 'react';
-import { ArrowRight, Compass, Shield, Database, Microscope, Network, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
+import { UserProfile } from '../types';
 
 interface AboutPageProps {
   onNavigate: (route: string) => void;
+  onOpenLoginModal?: () => void;
+  user?: UserProfile | null;
 }
 
-export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenLoginModal, user }) => {
+  const handleWorkbenchAction = () => {
+    if (!user && onOpenLoginModal) {
+      onOpenLoginModal();
+    } else {
+      onNavigate('analyze');
+    }
+  };
   return (
     <div className="min-h-screen pt-[86px] pb-20 bg-[#ffffff] text-[#000000]">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -144,7 +154,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </p>
           </div>
           <button
-            onClick={() => onNavigate('analyze')}
+            onClick={handleWorkbenchAction}
             className="btn-primary-scitech text-xs py-3 px-6"
           >
             Launch Analyze Workbench

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TREND_CASES } from '../data/trendCases';
 import { EARTH_VARIABLES } from '../data/variables';
 import { TrendCase } from '../types';
-import { ArrowRight, Compass, CheckCircle2, ChevronRight, BookOpen, AlertCircle, Database } from 'lucide-react';
+import { Compass, CheckCircle2, BookOpen, AlertCircle, Database } from 'lucide-react';
 import { TimeSeriesChart } from '../components/charts/TimeSeriesChart';
 import { getBaselineSeries } from '../data/curatedSeries';
 import { calculateStatistics } from '../services/statisticsEngine';

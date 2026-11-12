@@ -36,7 +36,6 @@ import {
   FileText
 } from 'lucide-react';
 import { DATA_SOURCES_CATALOG } from '../data/dataSourcesCatalog';
-import { MiniSparkline } from '../components/charts/MiniSparkline';
 
 interface DashboardPageProps {
   user: UserProfile | null;

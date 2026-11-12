@@ -66,7 +66,12 @@ export const TrendMap: React.FC<TrendMapProps> = ({
     }
 
     return () => {
-      // Keep map alive unless unmounted
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+      bboxLayerRef.current = null;
+      markerRef.current = null;
     };
   }, []);
 
@@ -116,23 +121,27 @@ export const TrendMap: React.FC<TrendMapProps> = ({
     // Clean previous bbox
     if (bboxLayerRef.current) {
       map.removeLayer(bboxLayerRef.current);
+      bboxLayerRef.current = null;
     }
 
     // Add Bounding Box polygon
-    const [minLon, minLat, maxLon, maxLat] = currentRegion.bbox;
-    const bounds = L.latLngBounds([minLat, minLon], [maxLat, maxLon]);
-    const rect = L.rectangle(bounds, {
-      color: variableColor,
-      weight: 1.5,
-      dashArray: '4 4',
-      fillColor: variableColor,
-      fillOpacity: 0.12
-    }).addTo(map);
-    bboxLayerRef.current = rect;
+    if (currentRegion?.bbox && currentRegion.bbox.length === 4) {
+      const [minLon, minLat, maxLon, maxLat] = currentRegion.bbox;
+      const bounds = L.latLngBounds([minLat, minLon], [maxLat, maxLon]);
+      const rect = L.rectangle(bounds, {
+        color: variableColor,
+        weight: 1.5,
+        dashArray: '4 4',
+        fillColor: variableColor,
+        fillOpacity: 0.12
+      }).addTo(map);
+      bboxLayerRef.current = rect;
+    }
 
     // Clean previous marker
     if (markerRef.current) {
       map.removeLayer(markerRef.current);
+      markerRef.current = null;
     }
 
     // Custom scientific target icon

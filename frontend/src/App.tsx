@@ -114,7 +114,11 @@ export const App: React.FC = () => {
         )}
 
         {currentRoute === 'about' && (
-          <AboutPage onNavigate={navigateTo} />
+          <AboutPage 
+            onNavigate={navigateTo} 
+            onOpenLoginModal={() => setIsLoginModalOpen(true)}
+            user={user}
+          />
         )}
 
         {currentRoute === 'features' && (
